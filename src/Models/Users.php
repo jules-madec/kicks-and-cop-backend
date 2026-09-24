@@ -6,7 +6,7 @@ use DateTimeImmutable;
 use Exception;
 use PDO;
 
-class User extends Database
+class Users extends Database
 {
 	private $id;
 	private $last_name;

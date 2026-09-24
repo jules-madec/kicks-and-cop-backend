@@ -5,7 +5,7 @@ namespace Models;
 use Exception;
 use PDO;
 
-class Size extends Database
+class Sizes extends Database
 {
     private $id;
     private $size;
