@@ -15,7 +15,7 @@ class Users extends Database
 	private $registration_date;
 	private $password;
 
-	
+
 	public function getId()
 	{
 		return $this->id;
@@ -74,20 +74,29 @@ class Users extends Database
 
 	public function setRegistration_date()
 	{
-		$this->registration_date = new DateTimeImmutable();
+		$this->registration_date = (new DateTimeImmutable())->format('Y-m-d H:i:s');
 	}
 
 	public function register()
 	{
 		$queryExecute = $this->db->prepare("INSERT INTO `users`(`first_name`,`last_name`, `email`, `password`, `registration_date`) 
-			VALUES (:first_name,:last_name,:registration_date, :email, :password)");
+			VALUES (:first_name, :last_name, :email, :password, :registration_date)");
 
 		$queryExecute->bindValue(':first_name', $this->first_name, PDO::PARAM_STR);
 		$queryExecute->bindValue(':last_name', $this->last_name, PDO::PARAM_STR);
 		$queryExecute->bindValue(':email', $this->email, PDO::PARAM_STR);
-		$queryExecute->bindValue(':registration_date', $this->registration_date, PDO::PARAM_STR);
 		$queryExecute->bindValue(':password', $this->password, PDO::PARAM_STR);
+		$queryExecute->bindValue(':registration_date', $this->registration_date, PDO::PARAM_STR);
+
 
 		return $queryExecute->execute();
+	}
+	public function getById($id)
+	{
+		$query = $this->db->prepare("SELECT * FROM `users` WHERE `id` = :id");
+		$query->bindValue(':id', $id, PDO::PARAM_INT);
+		$query->execute();
+
+		return $query->fetch(PDO::FETCH_ASSOC);
 	}
 }
