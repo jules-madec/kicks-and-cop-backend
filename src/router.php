@@ -1,5 +1,4 @@
 <?php
-require 'utils/utils.php';
 require 'utils/splAutoload.php';
 
 $path = $_SERVER['REDIRECT_URL'];
