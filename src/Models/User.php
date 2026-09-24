@@ -15,6 +15,14 @@ class User extends Database
 	private $registration_date;
 	private $password;
 
+	
+	public function getId()
+	{
+		return $this->id;
+	}
+
+
+
 	public function getLast_name()
 	{
 		return $this->last_name;

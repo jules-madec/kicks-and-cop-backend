@@ -11,6 +11,11 @@ class Size extends Database
     private $size;
     private $sneaker;
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
 
     public function getSize()
     {

@@ -13,6 +13,12 @@ class Sneakers extends Database
     private $image;
     private $price;
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
     public function getSneaker_name()
     {
         return $this->sneaker_name;
