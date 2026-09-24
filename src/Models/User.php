@@ -16,12 +16,15 @@ class User extends Database
 	private $password;
 
 	
-	public function getId()
+	public function findById($id)
 	{
-		return $this->id;
+		$queryExecute = $this->db->prepare("SELECT * FROM `users` WHERE id = :id");
+
+        $queryExecute->bindValue(':id', $this->$id, PDO::PARAM_INT);
+        $queryExecute->execute();
+
+        return $queryExecute->fetch(PDO::FETCH_ASSOC);
 	}
-
-
 
 	public function getLast_name()
 	{
