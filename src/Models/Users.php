@@ -90,6 +90,16 @@ class Users extends Database
 		$this->registration_date = (new DateTimeImmutable())->format('Y-m-d H:i:s');
 	}
 
+	public function updateEmail()
+	{
+		$queryExecute = $this->db->prepare("UPDATE `users` SET `email` = :email WHERE `id` = :id");
+	
+		$queryExecute->bindValue(':email', $this->email, PDO::PARAM_STR);
+		$queryExecute->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+		return $queryExecute->execute();
+	}
+
 	public function register()
 	{
 		$queryExecute = $this->db->prepare("INSERT INTO `users`(`first_name`,`last_name`, `email`, `password`, `registration_date`) 

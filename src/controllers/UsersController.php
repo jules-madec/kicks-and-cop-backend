@@ -1,17 +1,18 @@
 <?php
 
-use Models\User;
+use Models\Users;
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        if (!$id) {
+        if (empty($_GET['id'])) {
             http_response_code(400);
             echo json_encode(['error' => 'Identifiant utilisateur requis (/user/{id})']);
             break;
         }
 
-        $user = new User();
-        $data = $user->findById($id);
+        $user = new Users();
+        $user->setId((int) $_GET['id']);
+        $data = $user->findById();
 
         if (!$data) {
             http_response_code(404);
@@ -23,7 +24,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 
     case 'POST':
-        $user = new User();
+        $user = new Users();
         $errors = [];
 
         try {
@@ -65,18 +66,20 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 
     case 'PATCH':
-        if (!$id) {
+        if (empty($_GET['id'])) {
             http_response_code(400);
             echo json_encode(['error' => 'Identifiant utilisateur requis (/user/{id})']);
             break;
         }
 
         parse_str(file_get_contents('php://input'), $data);
-        $user = new User();
+        $user = new Users();
 
         try {
+            $user->setId((int) $_GET['id']);
             $user->setEmail($data['email'] ?? null);
-            echo json_encode(['success' => $user->setEmail((int) $id)]);
+
+            echo json_encode(['success' => $user->updateEmail()]);
         } catch (\Exception $e) {
             http_response_code(400);
             echo json_encode(['error' => $e->getMessage()]);

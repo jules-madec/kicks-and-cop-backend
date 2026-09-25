@@ -4,7 +4,7 @@ use Models\Favorites;
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        if (!$id) {
+        if (empty($_GET['id'])) {
             http_response_code(400);
             echo json_encode(['error' => 'Identifiant utilisateur requis (/favorites/{userId})']);
             break;
@@ -13,7 +13,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $favorites = new Favorites();
 
         try {
-            $favorites->setUser($id);
+            $favorites->setUser($_GET['id']);
             echo json_encode($favorites->getFavoritesByUser());
         } catch (\Exception $e) {
             http_response_code(400);

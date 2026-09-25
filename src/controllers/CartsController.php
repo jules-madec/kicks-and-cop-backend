@@ -6,7 +6,7 @@ use Models\Carts;
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        if (!$id) {
+        if (empty($_GET['id'])) {
             http_response_code(400);
             echo json_encode(['error' => 'Identifiant utilisateur requis (/cart/{userId})']);
             break;
@@ -15,7 +15,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $cart = new Carts();
 
         try {
-            $cart->setUser($id);
+            $cart->setUser($_GET['id']);
             echo json_encode([
                 'items' => $cart->getCartByUser(),
                 'total' => $cart->getTotal(),

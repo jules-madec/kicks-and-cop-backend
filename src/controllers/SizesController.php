@@ -5,7 +5,7 @@ use Models\Sizes;
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        if (!$id) {
+        if (empty($_GET['id'])) {
             http_response_code(400);
             echo json_encode(['error' => 'Identifiant de sneaker requis (/size/{sneakerId})']);
             break;
@@ -14,7 +14,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $size = new Sizes();
 
         try {
-            $size->setSneaker($id);
+            $size->setSneaker($_GET['id']);
             echo json_encode($size->getSizesBySneaker());
         } catch (\Exception $e) {
             http_response_code(400);

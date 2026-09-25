@@ -1,14 +1,14 @@
 <?php
 
 use Models\Sneakers;
-use Models\Size;
+use Models\Sizes;
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         $sneaker = new Sneakers();
 
-        if ($id) {
-            $data = $sneaker->getById($id);
+        if (!empty($_GET['id'])) {
+            $data = $sneaker->getById($_GET['id']);
 
             if (!$data) {
                 http_response_code(404);
@@ -16,8 +16,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 break;
             }
 
-            $size = new Size();
-            $size->setSneaker($id);
+            $size = new Sizes();
+            $size->setSneaker($_GET['id']);
 
             echo json_encode([
                 'sneaker' => $data,
