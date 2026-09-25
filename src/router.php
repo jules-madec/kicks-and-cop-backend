@@ -14,10 +14,6 @@ if (empty($segments)) {
 $resource = strtolower($segments[0]);
 $id = $segments[1] ?? null;
 
-if ($id !== null) {
-	$_GET['id'] = $id;
-}
-
 $controllerFile = "controllers/{$resource}Controller.php";
 
 if (!file_exists($controllerFile)) {

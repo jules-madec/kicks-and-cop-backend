@@ -7,7 +7,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         if (empty($_GET['id'])) {
             http_response_code(400);
-            echo json_encode(['error' => 'Identifiant de sneaker requis (/size/{sneakerId})']);
+            echo json_encode(['error' => 'Identifiant de sneaker requis (/size?sneakerId=id)']);
             break;
         }
 

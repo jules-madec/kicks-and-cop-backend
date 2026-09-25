@@ -8,7 +8,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         if (empty($_GET['id'])) {
             http_response_code(400);
-            echo json_encode(['error' => 'Identifiant utilisateur requis (/cart/{userId})']);
+            echo json_encode(['error' => 'Identifiant utilisateur requis (/cart?userId=id)']);
             break;
         }
 

@@ -6,7 +6,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         if (empty($_GET['id'])) {
             http_response_code(400);
-            echo json_encode(['error' => 'Identifiant utilisateur requis (/user/{id})']);
+            echo json_encode(['error' => 'Identifiant utilisateur requis (/user?id=id)']);
             break;
         }
 
@@ -68,7 +68,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'PATCH':
         if (empty($_GET['id'])) {
             http_response_code(400);
-            echo json_encode(['error' => 'Identifiant utilisateur requis (/user/{id})']);
+            echo json_encode(['error' => 'Identifiant utilisateur requis (/user?id=id)']);
             break;
         }
 
