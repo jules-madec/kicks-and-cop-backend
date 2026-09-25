@@ -76,7 +76,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         try {
             $user->setEmail($data['email'] ?? null);
-            echo json_encode(['success' => $user->updateEmail((int) $id)]);
+            echo json_encode(['success' => $user->setEmail((int) $id)]);
         } catch (\Exception $e) {
             http_response_code(400);
             echo json_encode(['error' => $e->getMessage()]);
