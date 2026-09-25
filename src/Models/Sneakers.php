@@ -12,14 +12,13 @@ class Sneakers extends Database
     private $description;
     private $image;
     private $price;
-
-    public function getById($id)
+    public function getId()
     {
-        $queryExecute = $this->db->prepare("SELECT * FROM `sneakers` WHERE id = :id");
-        $queryExecute->bindValue(':id', $this->$id, PDO::PARAM_INT);
-        $queryExecute->execute();
-
-        return $queryExecute->fetch(PDO::FETCH_ASSOC);
+        return $this->id;
+    }
+    public function setId($value)
+    {
+        $this->id = $value;
     }
 
     public function getSneaker_name()

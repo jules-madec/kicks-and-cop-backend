@@ -15,15 +15,25 @@ class Users extends Database
 	private $registration_date;
 	private $password;
 
-	
-	public function findById($id)
+
+
+	public function getId()
+	{
+		return $this->id;
+	}
+	public function setId($value)
+	{
+		$this->id = $value;
+	}
+
+	public function findById()
 	{
 		$queryExecute = $this->db->prepare("SELECT * FROM `users` WHERE id = :id");
 
-        $queryExecute->bindValue(':id', $this->$id, PDO::PARAM_INT);
-        $queryExecute->execute();
+		$queryExecute->bindValue(':id', $this->id, PDO::PARAM_INT);
+		$queryExecute->execute();
 
-        return $queryExecute->fetch(PDO::FETCH_ASSOC);
+		return $queryExecute->fetch(PDO::FETCH_ASSOC);
 	}
 
 	public function getLast_name()
@@ -93,13 +103,5 @@ class Users extends Database
 
 
 		return $queryExecute->execute();
-	}
-	public function getById($id)
-	{
-		$query = $this->db->prepare("SELECT * FROM `users` WHERE `id` = :id");
-		$query->bindValue(':id', $id, PDO::PARAM_INT);
-		$query->execute();
-
-		return $query->fetch(PDO::FETCH_ASSOC);
 	}
 }

@@ -1,6 +1,8 @@
 <?php
 
-use Models\Cart;
+
+use Models\Carts;
+
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
@@ -10,7 +12,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             break;
         }
 
-        $cart = new Cart();
+        $cart = new Carts();
 
         try {
             $cart->setUser($id);
@@ -26,7 +28,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 
     case 'POST':
-        $cart = new Cart();
+        $cart = new Carts();
 
         try {
             $cart->setUser($_POST['user'] ?? null);
@@ -48,7 +50,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
     case 'DELETE':
         parse_str(file_get_contents('php://input'), $data);
-        $cart = new Cart();
+        $cart = new Carts();
 
         try {
             $cart->setUser($data['user'] ?? null);

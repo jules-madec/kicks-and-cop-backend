@@ -1,6 +1,7 @@
 <?php
 
-use Models\Size;
+
+use Models\Sizes;
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
@@ -10,7 +11,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             break;
         }
 
-        $size = new Size();
+        $size = new Sizes();
 
         try {
             $size->setSneaker($id);

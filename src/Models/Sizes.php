@@ -15,6 +15,10 @@ class Sizes extends Database
     {
         return $this->id;
     }
+    public function setId($value)
+    {
+        $this->id = $value;
+    }
 
 
     public function getSize()
